@@ -14,6 +14,6 @@ def write_file(relative_path: str, file_source: str) -> str:
         with open(full_path, "w") as file:
             file.write(file_source)
 
-        return f"Done."
+        return "Done."
     except Exception as e:
         return f"Error: {str(e)}"

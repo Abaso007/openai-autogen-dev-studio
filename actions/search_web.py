@@ -68,6 +68,4 @@ def _fetch_brave_search_api(query: str) -> Union[WebSearchApiResponse, str]:
         return f"Error: {response.status_code} - {response.reason}"
 
     response_dict = json.loads(response.text)
-    response_data = from_dict(data_class=WebSearchApiResponse, data=response_dict)
-
-    return response_data
+    return from_dict(data_class=WebSearchApiResponse, data=response_dict)

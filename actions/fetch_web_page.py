@@ -18,7 +18,7 @@ def fetch_web_page(url: str) -> str:
         body_tag = soup.body if soup.body else soup
         for tag in body_tag.find_all(True):
             if tag.name != "a":
-                if tag.name == "script" or tag.name == "style":
+                if tag.name in ["script", "style"]:
                     tag.extract()
                 else:
                     tag.unwrap()
@@ -46,8 +46,7 @@ def _extract_content(tag: Tag, markdown_lines: List[str] = []) -> List[str]:
     for child in tag.children:
         if isinstance(child, NavigableString):
             if child.strip():  # Only non-empty strings
-                parent_tag = child.find_parent("a")
-                if parent_tag:
+                if parent_tag := child.find_parent("a"):
                     href = parent_tag.get("href", "")
                     markdown_lines.append(f"[{child.strip()}]({href})")
                 else:

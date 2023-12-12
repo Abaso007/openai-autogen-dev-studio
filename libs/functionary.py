@@ -50,10 +50,9 @@ def normalize_message(message_as_str: str | Union[Dict, str]) -> Union[Dict, str
             f"Expected 'content' key to be a string, got {type(content).__name__}."
         )
 
-    function_call_match = re.match(
+    if function_call_match := re.match(
         r"\s*to=functions\.([a-z_]+)[^\{]+(.*\})[^}]*", content, re.DOTALL
-    )
-    if function_call_match:
+    ):
         function_name = function_call_match.group(1)
         function_arguments_as_json = function_call_match.group(2)
 
