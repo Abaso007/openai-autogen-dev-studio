@@ -8,7 +8,7 @@ def debug(subject: str, output: Any, is_multine: bool = False):
     output_as_str = _capture_print_output(output)
     if is_multine:
         left_padded_output_as_str = "\n".join(
-            ["    " + line for line in output_as_str.split("\n")]
+            [f"    {line}" for line in output_as_str.split("\n")]
         )
 
         print(colored(f"[DEBUG] {subject}:", "cyan"))
